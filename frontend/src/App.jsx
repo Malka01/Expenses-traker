@@ -4,6 +4,10 @@ import Home from './pages/Home';
 import AddTransaction from './pages/AddTransaction';
 import Transactions from './pages/Transactions';
 import ManageTags from './pages/ManageTags';
+import {CgAdd} from "react-icons/cg";
+import { FiHome } from "react-icons/fi";
+import { MdOutlineAnalytics } from "react-icons/md";
+import { GoTag } from "react-icons/go";
 
 function App() {
   const [showTagsPanel, setShowTagsPanel] = useState(false);
@@ -12,44 +16,45 @@ function App() {
     <Router>
       <div className="flex h-screen">
         {/* Sidebar */}
-        <div className="w-64 bg-white shadow p-4 flex flex-col gap-4">
-          <h1 className="text-2xl font-bold text-blue-600 mb-6">SpendWise</h1>
+        <div className="w-64 text-black bg-white shadow p-4 flex flex-col gap-4">
+          <h1 className="text-2xl flex justify-center font-bold text-black-600 mb-6">SpendWise</h1>
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex items-center gap-2 px-4 py-2 rounded ${
-                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
+              `flex items-center gap-2 px-4 py-2 rounded ${isActive ? 'bg-blue-600 rounded-[10px] text-white' : 'hover:bg-gray-100'
               }`
             }
           >
-            🏠 Home
+            <FiHome className="text-lg" />
+            <span>Home</span>
           </NavLink>
           <NavLink
             to="/add"
             className={({ isActive }) =>
-              `flex items-center gap-2 px-4 py-2 rounded ${
-                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
+              `flex items-center gap-2 px-4 py-2 rounded ${isActive ? 'bg-blue-600 rounded-[10px] text-white' : 'hover:bg-gray-100'
               }`
             }
           >
-            
-            ➕ Add Transaction
+            <CgAdd className="text-lg" />
+            <span>Add Transaction</span>
           </NavLink>
+
           <NavLink
             to="/transactions"
             className={({ isActive }) =>
-              `flex items-center gap-2 px-4 py-2 rounded ${
-                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
+              `flex items-center gap-2 px-4 py-2 rounded ${isActive ? 'bg-blue-600 rounded-[10px] text-white' : 'hover:bg-gray-100'
               }`
             }
           >
-            📊 View Expenses
+            <MdOutlineAnalytics className="text-lg"/>
+            <span>View Expenses</span>
           </NavLink>
           <button
             onClick={() => setShowTagsPanel(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 text-left" 
+            className="flex items-center text-black gap-2 px-4 py-2 rounded hover:bg-gray-100 text-left"
           >
-            🏷️ Manage Tags
+            <GoTag className="text-lg"/>
+            <span>Manage Tags</span>
           </button>
         </div>
 

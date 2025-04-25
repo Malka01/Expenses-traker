@@ -32,6 +32,7 @@ function App() {
               }`
             }
           >
+            
             ➕ Add Transaction
           </NavLink>
           <NavLink

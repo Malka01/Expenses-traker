@@ -1,20 +1,19 @@
-/*import express from "express";
-import cors from "cors";
-import mysql from "mysql2";
-import dotenv from "dotenv";
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const transactionsRouter = require('./routes/addtransactions');
 
-dotenv.config();*/
-const express = require("express");
-const cors = require("cors");
+
 const mysql = require("mysql2");
-const dotenv = require("dotenv");
 
 dotenv.config();
+
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/transactions', transactionsRouter);
 
 // MySQL connection
 const db = mysql.createConnection({

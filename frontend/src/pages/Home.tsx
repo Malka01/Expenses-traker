@@ -11,6 +11,7 @@ import { ChartArea, PlusCircle } from "lucide-react";
 import { FC, useCallback, useEffect, useState } from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import { Link } from "react-router";
+import { toast } from "sonner";
 
 const currencies = [
   { value: "CAD", label: "Canadian Dollar (CA$)" },
@@ -34,12 +35,12 @@ export const Home: FC = () => {
       .post("/api/currency", { currency: value })
       .then((res) => {
         if (res.status === 200) {
-          alert("Currency changed successfully");
+          toast.success("Currency changed successfully");
           setCurrency(value);
         }
       })
       .catch(() => {
-        alert("Error changing currency");
+        toast.error("Error changing currency");
       });
   };
 
@@ -56,7 +57,7 @@ export const Home: FC = () => {
         }
       })
       .catch(() => {
-        alert("Error getting currency");
+        toast.error("Error getting currency");
       });
   }, []);
 

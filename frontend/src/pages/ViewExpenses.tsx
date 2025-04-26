@@ -39,6 +39,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Transaction } from "./AddTransactions";
+import { toast } from "sonner";
 
 export interface TransactionResponse {
   id?: number;
@@ -88,7 +89,7 @@ export const ViewExpenses: FC = () => {
         }
       })
       .catch(() => {
-        alert("Error getting tags");
+        toast.error("Error getting tags");
       });
   }, []);
 
@@ -102,7 +103,7 @@ export const ViewExpenses: FC = () => {
         }
       })
       .catch(() => {
-        alert("Error getting currency");
+        toast.error("Error getting currency");
       });
   }, []);
 
@@ -122,7 +123,7 @@ export const ViewExpenses: FC = () => {
         }
       })
       .catch(() => {
-        alert("Error getting transactions");
+        toast.error("Error getting transactions");
       });
   }, [
     filters.amount,
@@ -138,12 +139,12 @@ export const ViewExpenses: FC = () => {
       .delete(`/api/transactions/${id}`)
       .then((res) => {
         if (res.status === 204) {
-          alert("Transaction deleted successfully");
+          toast.success("Transaction deleted successfully");
           getTransactions();
         }
       })
       .catch(() => {
-        alert("Error deleting transaction");
+        toast.error("Error deleting transaction");
       });
   };
 

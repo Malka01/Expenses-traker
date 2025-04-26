@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Transaction } from "@/pages/AddTransactions";
 import axios from "axios";
 import { Tag } from "./manage-tags";
+import { toast } from "sonner";
 
 const currencySymbols = {
   CAD: "CA$",
@@ -52,10 +53,10 @@ export const ManageTransitions: FC<{
       })
       .then((res) => {
         if (res.status === 201) {
-          alert("Transaction added successfully");
+          toast.success("Transaction added successfully");
         }
         if (res.status === 200) {
-          alert("Transaction updated successfully");
+          toast.success("Transaction updated successfully");
           if (closeModal) closeModal();
         }
         setTransaction({
@@ -66,7 +67,7 @@ export const ManageTransitions: FC<{
         });
       })
       .catch(() => {
-        alert("Error adding transaction");
+        toast.error("Error adding transaction");
       });
   };
 

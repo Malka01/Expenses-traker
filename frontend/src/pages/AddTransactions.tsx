@@ -6,6 +6,7 @@ import {
 } from "@/components/manage-transitions";
 import axios from "axios";
 import { FC, useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export interface Transaction {
   id?: number;
@@ -28,7 +29,7 @@ export const AddTransactions: FC = () => {
         }
       })
       .catch(() => {
-        alert("Error getting tags");
+        toast.error("Error getting tags");
       });
   }, []);
 
@@ -42,7 +43,7 @@ export const AddTransactions: FC = () => {
         }
       })
       .catch(() => {
-        alert("Error getting currency");
+        toast.error("Error getting currency");
       });
   }, []);
 

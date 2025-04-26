@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import axios from "axios";
+import { toast } from "sonner";
 
 export interface Tag {
   id: number | null;
@@ -37,14 +38,14 @@ export const ManageTags: FC<{
         }
       })
       .catch(() => {
-        alert("Error getting tags");
+        toast.error("Error getting tags");
       });
   };
 
   // add or update tag
   const addOrUpdateTag = async () => {
     if (currentTag.name === "" || currentTag.color === "") {
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
       return;
     }
 
@@ -59,7 +60,7 @@ export const ManageTags: FC<{
       })
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
-          alert(
+          toast.success(
             currentTag.id
               ? "Tag updated successfully"
               : "Tag added successfully"
@@ -69,14 +70,14 @@ export const ManageTags: FC<{
         }
       })
       .catch(() => {
-        alert(currentTag.id ? "Error updating tag" : "Error adding tag");
+        toast.error(currentTag.id ? "Error updating tag" : "Error adding tag");
       });
   };
 
   // delete tag
   const deleteTag = async (id: number | null) => {
     if (id === null) {
-      alert("Tag not found");
+      toast.error("Tag not found");
       return;
     }
 
@@ -84,12 +85,12 @@ export const ManageTags: FC<{
       .delete(`/api/tags/${id}`)
       .then((res) => {
         if (res.status === 204) {
-          alert("Tag deleted successfully");
+          toast.success("Tag deleted successfully");
           getTags();
         }
       })
       .catch(() => {
-        alert("Error deleting tag");
+        toast.error("Error deleting tag");
       });
   };
 

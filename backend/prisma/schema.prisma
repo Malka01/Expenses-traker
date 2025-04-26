@@ -17,3 +17,24 @@ model CurrentData{
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+model Tags{
+  id              Int      @id @default(autoincrement())
+  name            String   @unique
+  color           String   @default("#000000")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  transactions    Transactions[]
+}
+
+model Transactions{
+  id              Int      @id @default(autoincrement())
+  amount          Float
+  description     String
+  type            String   @default("income")
+  date            DateTime @default(now())
+  tags            Tags[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

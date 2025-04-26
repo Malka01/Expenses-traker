@@ -44,7 +44,7 @@ export const Home: FC = () => {
   };
 
   // get currency , current balance , income and expenses
-  const getCurrency = useCallback(async () => {
+  const getSummary = useCallback(async () => {
     axios
       .get("/api/summary")
       .then((res) => {
@@ -60,10 +60,10 @@ export const Home: FC = () => {
       });
   }, []);
 
-  // get currency and current balance on mount
+  // get summary on mount
   useEffect(() => {
-    getCurrency();
-  }, [getCurrency]);
+    getSummary();
+  }, [getSummary]);
 
   return (
     <Layout>

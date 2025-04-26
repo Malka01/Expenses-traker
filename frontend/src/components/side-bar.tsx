@@ -1,7 +1,8 @@
 import { ChartArea, HomeIcon, PlusCircle, TagIcon } from "lucide-react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Button } from "./ui/button";
+import { ManageTags } from "./manage-tags";
 
 const sideBarItem = [
   {
@@ -22,6 +23,7 @@ const sideBarItem = [
 ];
 
 export const SideBar: FC = () => {
+  const [open, setOpen] = useState(false);
   // active link
   const location = useLocation();
   const { pathname } = location;
@@ -34,6 +36,7 @@ export const SideBar: FC = () => {
       <div className="mt-6 flex flex-col gap-3">
         {sideBarItem.map((item) => (
           <Link
+            key={item.label}
             to={item.link}
             className={`${
               pathname === item.link ? "bg-indigo-700 text-white" : ""
@@ -49,11 +52,15 @@ export const SideBar: FC = () => {
           className={
             "flex gap-x-2.5 justify-start !bg-transparent w-full cursor-pointer text-black shadow-none items-end font-medium text-sm !px-4 py-2 rounded-sm"
           }
+          onClick={() => setOpen(true)}
         >
           <TagIcon className="h-5 w-5" />
           <span>Manage Tags</span>
         </Button>
       </div>
+
+      {/* manage tags component */}
+      <ManageTags open={open} onOpenChange={setOpen} />
     </aside>
   );
 };

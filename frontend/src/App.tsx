@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import { Home } from "@/pages/Home";
 import axios from "axios";
+import { Home } from "@/pages/Home";
+import { AddTransactions } from "@/pages/AddTransactions";
+import { ViewExpenses } from "./pages/ViewExpenses";
 
 function App() {
   // setup axios
@@ -9,8 +11,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/add" element={<Home />} />
-        <Route path="/expenses" element={<Home />} />
+        <Route path="/add" element={<AddTransactions />} />
+        <Route path="/expenses" element={<ViewExpenses />} />
       </Routes>
     </Router>
   );

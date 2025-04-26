@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { CgAdd } from "react-icons/cg";
+import { CgAdd, CgTrending, CgTrendingDown } from "react-icons/cg";
 import { MdOutlineAnalytics } from "react-icons/md";
-import { CgTrending } from "react-icons/cg";
-import { CgTrendingDown } from "react-icons/cg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,63 +11,62 @@ const Home = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/summary")
-      .then((res) => {
-        setSummary(res.data);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch summary:", err);
-      });
+      .then((res) => setSummary(res.data))
+      .catch((err) => console.error("Failed to fetch summary:", err));
   }, []);
 
   const balance = summary.income - summary.expenses;
 
+  const currencySymbol = {
+    CAD: "CA$",
+    USD: "$",
+    LKR: "රු",
+    EUR: "€",
+    GBP: "£",
+    INR: "₹"
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
-      
-
-      {/* Main Content */}
-      <main className="flex-1 p-8 flex flex-col items-center">
-        {/* Title */}
+      <main className="flex-1 p-5 flex flex-col items-center">
+        {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl p-[0px] font-extrabold text-indigo-600">SpendWise</h2>
-          <p className="text-gray-600">
-            Effortlessly track your daily expenses and take control of your
-          </p>
+          <h2 className="text-3xl mb-2 font-extrabold p-[3] text-indigo-600">SpendWise</h2>
+          <p className="mt-2 text-gray-600">Effortlessly track your daily expenses and take control of your</p>
           <p>financial life</p>
         </div>
 
-        {/* Balance Card */}
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-6 rounded-2xl shadow-lg w-full max-w-xl text-center mb-8">
+        {/* Balance Display */}
+        <div className="bg-gradient-to-r h-40 from-blue-500 to-indigo-500 text-white p-6 rounded-[9px] shadow-lg w-full max-w-xl text-center mb-8">
           <p className="text-xl font-medium">Your Balance</p>
-          <p className="text-3xl font-bold text-green-300 mt-2">
-            +{currency === "CAD" ? "CA$" : ""}{balance.toFixed(2)}
+          <p className={`text-3xl font-bold ${balance >= 0 ? "text-green-300" : "text-red-300"} mt-2`}>
+            {balance >= 0 ? "+" : "-"}{currencySymbol[currency]}{Math.abs(balance).toFixed(2)}
           </p>
         </div>
 
-        {/* Income & Expenses */}
+        {/* Income & Expense Cards */}
         <div className="flex gap-6 mb-8">
           <div className="bg-white shadow-md w-69 h-20 rounded-[6px] p-4 w-64 flex justify-between items-center">
-            <div className="text-left">
+            <div>
               <p className="text-sm text-gray-500">Income</p>
               <p className="text-xl text-green-600 font-bold">
-                {currency === "CAD" ? "CA$" : ""}{summary.income.toFixed(2)}
+                {currencySymbol[currency]}{summary.income.toFixed(2)}
               </p>
             </div>
             <div className="bg-green-100 rounded-full p-2">
-              <span className="text-green-600 text-xl"><CgTrending /></span>
+              <CgTrending className="text-green-600 text-xl" />
             </div>
           </div>
-          {/*new*/}
-          <div className="bg-white shadow-md w-69 h-20 rounded-[6px] p-4 w-64 flex justify-between items-center">
-            <div className="text-left">
-              {/*<div className="bg-white shadow rounded-xl p-6 w-60 text-center">*/}
+
+          <div className="bg-white shadow-md w-69 rounded-[6px] p-4 w-64 flex justify-between items-center">
+            <div>
               <p className="text-sm text-gray-500">Expenses</p>
               <p className="text-xl text-red-600 font-bold">
-                {currency === "CAD" ? "CA$" : ""}{summary.expenses.toFixed(2)}
+                {currencySymbol[currency]}{summary.expenses.toFixed(2)}
               </p>
             </div>
             <div className="bg-red-100 rounded-full p-2">
-              <span className="text-red-600 text-xl"><CgTrendingDown /></span>
+              <CgTrendingDown className="text-red-600 text-xl" />
             </div>
           </div>
         </div>
@@ -78,22 +75,21 @@ const Home = () => {
         <div className="flex gap-4 mb-8">
           <button
             onClick={() => navigate("/add")}
-            className="bg-blue-600 text-white w-70 h-12 px-6 py-3 rounded-[5px]  hover:bg-blue-700 flex items-center justify-center space-x-2"
+            className="bg-blue-600 text-white w-69 h-12 px-6 py-3 rounded-[5px] hover:bg-blue-700 flex items-center space-x-2"
           >
             <CgAdd className="text-lg" />
             <span>Add Transaction</span>
           </button>
           <button
             onClick={() => navigate("/transactions")}
-            className="bg-gray-100 text-black-700 w-70 h-12 px-6 py-3 rounded-lg hover:bg-gray-200 flex items-center justify-center space-x-2"
+            className="bg-gray-100 w-69 h-12 text-black px-6 py-3 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
           >
-            <MdOutlineAnalytics className="text-lg"/>
+            <MdOutlineAnalytics className="text-lg" />
             <span>View Transactions</span>
-          
           </button>
         </div>
 
-        {/* Currency Settings */}
+        {/* Currency Selector */}
         <div className="w-full max-w-xl bg-white p-4 rounded-xl shadow">
           <h3 className="font-semibold mb-2">Currency Settings</h3>
           <select

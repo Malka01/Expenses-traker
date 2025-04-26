@@ -34,14 +34,14 @@ db.connect((err) => {
 });
 
 // Route: Add a new transaction (updated to match frontend)
-app.post("/api/transactions", (req, res) => {
+app.post("/api/addtransactions", (req, res) => {
   const { type, description, amount, tag } = req.body;
 
   if (!type || !description || !amount || !tag) {
     return res.status(400).json({ message: "All fields are required." });
   }
 
-  const query = "INSERT INTO transactions (type, description, amount, tag) VALUES (?, ?, ?, ?)";
+  const query = "INSERT INTO addtransactions (type, description, amount, tag) VALUES (?, ?, ?, ?)";
   db.query(query, [type, description, amount, tag], (err, result) => {
     if (err) {
       console.error("Failed to insert transaction:", err);
@@ -54,8 +54,8 @@ app.post("/api/transactions", (req, res) => {
 
 // Route: Income and expense summary
 app.get("/api/summary", (req, res) => {
-  const incomeQuery = "SELECT SUM(amount) AS income FROM transactions WHERE type='income'";
-  const expenseQuery = "SELECT SUM(amount) AS expenses FROM transactions WHERE type='expense'";
+  const incomeQuery = "SELECT SUM(amount) AS income FROM addtransactions WHERE type='income'";
+  const expenseQuery = "SELECT SUM(amount) AS expenses FROM addtransactions WHERE type='expense'";
 
   db.query(incomeQuery, (err, incomeResult) => {
     if (err) return res.status(500).json(err);

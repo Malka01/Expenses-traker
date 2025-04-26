@@ -96,7 +96,7 @@ const AddTransaction = () => {
                 placeholder="What was this transaction for?"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full h-20 bg-gray border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400"
               />
             </div>
 
@@ -114,7 +114,7 @@ const AddTransaction = () => {
 
             {/* Tag */}
             <div>
-              <label className="block font-medium mb-1">Tag</label>
+              <label className="block font-medium mb-1">Tag (Select at least one)</label>
               <input
                 type="text"
                 placeholder="e.g. Food"

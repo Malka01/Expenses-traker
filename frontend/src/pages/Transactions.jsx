@@ -25,7 +25,16 @@ const Transactions = () => {
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between mb-6">
-        <select
+      <input
+          type="text"
+          placeholder="Search transaction"
+          value={tagFilter}
+          onChange={(e) => setTagFilter(e.target.value)}
+          className="border rounded px-4 py-2 flex-grow"
+        />
+      </div>
+      <div className='gap-5 mb-6'>
+      <select
           className="border rounded px-4 py-2"
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
@@ -34,14 +43,15 @@ const Transactions = () => {
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
-
-        <input
-          type="text"
-          placeholder="Filter by tag"
-          value={tagFilter}
-          onChange={(e) => setTagFilter(e.target.value)}
-          className="border rounded px-4 py-2 flex-grow"
-        />
+        <select
+          className="border rounded px-4 py-2"
+          value={typeFilter}
+          onChange={(e) => setTypeFilter(e.target.value)}
+        >
+          <option value="Gthan">Greater than</option>
+          <option value="Lthan">Less than</option>
+          
+        </select>
       </div>
 
       {/* Transaction List */}

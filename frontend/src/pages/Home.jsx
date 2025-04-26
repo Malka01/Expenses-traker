@@ -25,13 +25,13 @@ const Home = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
+      
 
       {/* Main Content */}
       <main className="flex-1 p-8 flex flex-col items-center">
         {/* Title */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold text-indigo-600">SpendWise</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl p-[0px] font-extrabold text-indigo-600">SpendWise</h2>
           <p className="text-gray-600">
             Effortlessly track your daily expenses and take control of your
           </p>

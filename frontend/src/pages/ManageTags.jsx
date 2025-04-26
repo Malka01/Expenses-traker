@@ -14,7 +14,8 @@ const ManageTags = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed top-0 right-0 w-85 h-full bg-white z-50 p-6 flex flex-col">
+   
+    <div className="fixed top-0 right-2 h-full bg-white z-50 p-6 flex flex-col">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold">Manage Tags</h2>
         <button onClick={onClose} className="text-gray-500 hover:text-red-600 text-2xl font-bold">
@@ -49,7 +50,7 @@ const ManageTags = ({ onClose }) => {
 
       <div className="mt-6">
         
-        <ul className="space-y-2 max-h-64 overflow-y-auto">
+        <ul className="space-y-4 bg bg-gray-100 max-h-64 ">
           {tags.map((tag, index) => (
             <li key={index} className="flex items-center gap-3">
               <span
@@ -57,11 +58,19 @@ const ManageTags = ({ onClose }) => {
                 style={{ backgroundColor: tag.color }}
               />
               <span className="text-sm">{tag.name}</span>
+              <li>
+              <button className="text-sm">Edit</button>
+              <button className="text-sm">Delete</button>
             </li>
+            </li>
+            
+            
           ))}
+          
         </ul>
       </div>
     </div>
+    
   );
 };
 
